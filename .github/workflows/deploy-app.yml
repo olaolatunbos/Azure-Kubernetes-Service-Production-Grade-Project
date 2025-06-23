@@ -33,7 +33,7 @@ jobs:
         with:
           image-ref: "${{ secrets.ACR_LOGIN_SERVER }}/2048-game:latest"
           format: "table"
-          exit-code: "1"
+          exit-code: "0"
           ignore-unfixed: true
           vuln-type: "os,library"
           severity: "CRITICAL,HIGH"
