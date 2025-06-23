@@ -19,7 +19,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Build and tag Docker image
-        run: docker build -t ${{ secrets.ACR_LOGIN_SERVER }}/2048:latest 2048-game/Dockerfile 2048-game/
+        run: docker build -t ${{ secrets.ACR_LOGIN_SERVER }}/2048:latest -f 2048-game/Dockerfile .
 
       - name: Push Docker image to ACR
         run: docker push ${{ secrets.ACR_LOGIN_SERVER }}/2048:latest
