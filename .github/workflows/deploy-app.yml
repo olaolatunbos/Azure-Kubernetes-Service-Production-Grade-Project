@@ -26,19 +26,7 @@ jobs:
           password: ${{ secrets.ACR_PASSWORD }}
 
       - name: Build and tag Docker image
-        run: docker build -t ${{ secrets.ACR_LOGIN_SERVER }}/my-flask-app:latest -f 2048-game/Dockerfile .
+        run: docker build -t ${{ secrets.ACR_LOGIN_SERVER }}2048-game:latest -f 2048-game/Dockerfile .
 
       - name: Push Docker image to ACR
-        run: docker push ${{ secrets.ACR_LOGIN_SERVER }}/my-flask-app:latest
-
-      - name: Azure Login
-        uses: azure/login@v1
-        with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
-
-      - name: Deploy to Azure Container Apps
-        uses: azure/container-apps-deploy-action@v1
-        with:
-          imageToDeploy: ${{ secrets.ACR_LOGIN_SERVER }}/my-flask-app:latest
-          resourceGroup: ${{ secrets.AZURE_RESOURCE_GROUP }}
-          containerAppName: taskmanagement-app
+        run: docker push ${{ secrets.ACR_LOGIN_SERVER }}2048-game:latest
