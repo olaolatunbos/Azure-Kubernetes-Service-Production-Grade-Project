@@ -18,11 +18,18 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
+      - name: Log in to Azure Container Registry (ACR)
+        uses: azure/docker-login@v1
+        with:
+          login-server: ${{ secrets.ACR_LOGIN_SERVER }}
+          username: ${{ secrets.ACR_USERNAME }}
+          password: ${{ secrets.ACR_PASSWORD }}
+
       - name: Build and tag Docker image
-        run: docker build -t ${{ secrets.ACR_LOGIN_SERVER }}/2048:latest -f 2048-game/Dockerfile .
+        run: docker build -t ${{ secrets.ACR_LOGIN_SERVER }}/my-flask-app:latest -f 2048-game/Dockerfile .
 
       - name: Push Docker image to ACR
-        run: docker push ${{ secrets.ACR_LOGIN_SERVER }}/2048:latest
+        run: docker push ${{ secrets.ACR_LOGIN_SERVER }}/my-flask-app:latest
 
       - name: Azure Login
         uses: azure/login@v1
@@ -32,6 +39,6 @@ jobs:
       - name: Deploy to Azure Container Apps
         uses: azure/container-apps-deploy-action@v1
         with:
-          imageToDeploy: ${{ secrets.ACR_LOGIN_SERVER }}/2048:latest
+          imageToDeploy: ${{ secrets.ACR_LOGIN_SERVER }}/my-flask-app:latest
           resourceGroup: ${{ secrets.AZURE_RESOURCE_GROUP }}
-          containerAppName: 2048-game
+          containerAppName: taskmanagement-app
