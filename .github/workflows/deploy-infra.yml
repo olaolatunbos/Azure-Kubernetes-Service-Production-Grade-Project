@@ -52,6 +52,9 @@ jobs:
         id: validate
         run: terraform validate -no-color
 
+      - name: Checkov Scan
+        uses: bridgecrewio/checkov-action@v12
+
       - name: Terraform Plan
         id: plan
         run: |
