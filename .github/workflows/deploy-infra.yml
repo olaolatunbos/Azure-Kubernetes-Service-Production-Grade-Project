@@ -180,4 +180,4 @@ jobs:
           path: ./terraform
 
       - name: Terraform Apply
-        run: terraform apply -auto-approve "./main.tfplan"
+        run: terraform apply -auto-approve -lock=false "./main.tfplan"
