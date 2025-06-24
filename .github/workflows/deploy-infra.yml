@@ -1,4 +1,4 @@
-name: Deploy AKS Cluster Infra
+name: Deploy Azure Infrastructure
 on:
   pull_request:
     branches:
@@ -6,11 +6,6 @@ on:
     paths:
       - "terraform/**"
   workflow_dispatch:
-    inputs:
-      run_apply:
-        description: "Run Terraform Apply?"
-        required: false
-        default: "false"
 
 permissions:
   contents: read
@@ -160,7 +155,7 @@ jobs:
             })
 
   terraform-apply:
-    if: github.event.inputs.run_apply == 'true'
+    needs: terraform-plan
     name: Terraform Apply
     runs-on: ubuntu-latest
     defaults:
