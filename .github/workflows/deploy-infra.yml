@@ -58,6 +58,8 @@ jobs:
           ls -l ./environment || echo "No environment folder in terraform"
           echo "Listing files relative to root:"
           ls -l ../environment || echo "No environment folder one level above terraform"
+      - name: Find all tfvars files in repo
+        run: find . -name "*.tfvars"
 
       - name: Terraform Plan
         id: plan
