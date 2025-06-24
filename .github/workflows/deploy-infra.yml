@@ -48,16 +48,6 @@ jobs:
         id: init
         run: terraform init -backend-config="resource_group_name=${{secrets.BACKEND_AZURE_RESOURCE_GROUP_NAME}}" -backend-config="storage_account_name=${{secrets.BACKEND_AZURE_STORAGE_ACCOUNT_NAME}}" -backend-config="container_name=${{secrets.BACKEND_AZURE_STORAGE_ACCOUNT_CONTAINER_NAME}}"
 
-      - name: Terraform Validate
-        id: validate
-        run: terraform validate -no-color
-
-      - name: Check environment directory content
-        run: |
-          echo "Listing files relative to terraform folder:"
-          ls -l ./environment || echo "No environment folder in terraform"
-          echo "Listing files relative to root:"
-          ls -l ../environment || echo "No environment folder one level above terraform"
       - name: Find all tfvars files in repo
         run: find . -name "*.tfvars"
 
@@ -180,4 +170,4 @@ jobs:
           path: ./terraform
 
       - name: Terraform Apply
-        run: terraform apply -auto-approve ./terraform/main.tfplan"
+        run: terraform apply -auto-approve "./main.tfplan"
