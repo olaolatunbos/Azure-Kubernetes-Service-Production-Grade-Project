@@ -52,6 +52,13 @@ jobs:
         id: validate
         run: terraform validate -no-color
 
+      - name: Check environment directory content
+        run: |
+          echo "Listing files relative to terraform folder:"
+          ls -l ./environment || echo "No environment folder in terraform"
+          echo "Listing files relative to root:"
+          ls -l ../environment || echo "No environment folder one level above terraform"
+
       - name: Terraform Plan
         id: plan
         run: |
