@@ -4,11 +4,11 @@ on:
   push:
     branches:
       - main
-  workflow_dispatch:
+    paths:
+      - 2048/game
 
 permissions:
   contents: read
-  pull-requests: write
 
 jobs:
   deploy-flask:
