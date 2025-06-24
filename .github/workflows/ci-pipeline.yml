@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - 2048-game
+      - "2048-game/**"
 
 permissions:
   contents: read
