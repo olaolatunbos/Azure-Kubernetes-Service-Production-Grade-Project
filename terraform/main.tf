@@ -17,6 +17,7 @@ module "vnet" {
   deployment_environment        = var.environment
   virtual_network_address_space = ["10.1.0.0/16"]
   subnet_address_prefixes       = ["10.1.1.0/24"]
+  depends_on                    = [azurerm_resource_group.resource-group]
 }
 
 module "acr" {
