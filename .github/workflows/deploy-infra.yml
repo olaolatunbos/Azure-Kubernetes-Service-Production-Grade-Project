@@ -156,7 +156,6 @@ jobs:
 
   terraform-apply:
     needs: terraform-plan
-    if: github.event_name == 'workflow_dispatch'
     name: Terraform Apply
     runs-on: ubuntu-latest
     defaults:
