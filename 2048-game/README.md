@@ -1,6 +1,6 @@
 # Run This App Locally
 
-_Ensure nodejs is installed first_..
+_Ensure nodejs is installed first_...
 
 ```
 node -v
