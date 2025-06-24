@@ -6,6 +6,11 @@ on:
     paths:
       - "terraform/**"
   workflow_dispatch:
+    inputs:
+      run_apply:
+        description: "Run Terraform Apply?"
+        required: false
+        default: "false"
 
 permissions:
   contents: read
@@ -65,7 +70,7 @@ jobs:
         id: plan
         run: |
           export exitcode=0
-          terraform plan -no-color -lock=false -var-file="./environments/prod.tfvars" -out main.tfplan || export exitcode=$?
+          terraform plan -no-color -var-file="./environments/prod.tfvars" -out main.tfplan || export exitcode=$?
 
           echo "exitcode=$exitcode" >> $GITHUB_OUTPUT
 
@@ -155,7 +160,7 @@ jobs:
             })
 
   terraform-apply:
-    needs: terraform-plan
+    if: github.event.inputs.run_apply == 'true'
     name: Terraform Apply
     runs-on: ubuntu-latest
     defaults:
@@ -180,4 +185,4 @@ jobs:
           path: ./terraform
 
       - name: Terraform Apply
-        run: terraform apply -auto-approve -lock=false "./main.tfplan"
+        run: terraform apply -auto-approve ./main.tfplan"
