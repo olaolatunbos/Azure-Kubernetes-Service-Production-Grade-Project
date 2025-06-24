@@ -156,6 +156,7 @@ jobs:
 
   terraform-apply:
     needs: terraform-plan
+    if: github.event_name == 'workflow_dispatch'
     name: Terraform Apply
     runs-on: ubuntu-latest
     defaults:
@@ -180,4 +181,4 @@ jobs:
           path: ./terraform
 
       - name: Terraform Apply
-        run: terraform apply -auto-approve ./main.tfplan"
+        run: terraform apply -auto-approve ./terraform/main.tfplan"
