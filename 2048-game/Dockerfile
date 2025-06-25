@@ -1,13 +1,14 @@
-# Use the official Nginx image from Docker Hub
-FROM nginx:alpine
+# Use an official Python runtime as a parent image
+FROM python:3.11-slim
 
-# Remove default static files
-RUN rm -rf /usr/share/nginx/html/*
+# Set the working directory in the container
+WORKDIR /app
 
-# Copy your game files to the Nginx HTML directory
-COPY . /usr/share/nginx/html/
+# Copy the current directory contents into the container at /app
+COPY . /app
 
-# Expose port 80
-EXPOSE 80
+# Expose port 3000 to the outside world
+EXPOSE 3000
 
-# Nginx runs by default
+# Run the Python HTTP server on port 3000 when the container launches
+CMD ["python", "-m", "http.server", "3000"]
