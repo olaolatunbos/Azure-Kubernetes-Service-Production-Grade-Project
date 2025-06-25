@@ -5,7 +5,7 @@ FROM python:3.11-slim
 WORKDIR /app
 
 # Copy the current directory contents into the container at /app
-COPY . /app
+COPY 2048-game/ .
 
 # Expose port 3000 to the outside world
 EXPOSE 3000
