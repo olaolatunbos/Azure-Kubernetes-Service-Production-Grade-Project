@@ -5,27 +5,14 @@ metadata:
   annotations:
     nginx.ingress.kubernetes.io/ssl-redirect: "false"
     nginx.ingress.kubernetes.io/use-regex: "true"
-    nginx.ingress.kubernetes.io/rewrite-target: /$2
+    nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   ingressClassName: nginx
   rules:
-  - http:
+  - host: rand.taskmanagement-app.com
+    http:
       paths:
-      - path: /hello-world-one(/|$)(.*)
-        pathType: Prefix
-        backend:
-          service:
-            name: app-service
-            port:
-              number: 80
-      - path: /hello-world-two(/|$)(.*)
-        pathType: Prefix
-        backend:
-          service:
-            name: app-service
-            port:
-              number: 80
-      - path: /(.*)
+      - path: /
         pathType: Prefix
         backend:
           service:
