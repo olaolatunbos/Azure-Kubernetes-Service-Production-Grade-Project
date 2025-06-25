@@ -9,7 +9,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-  - host: rand.taskmanagement-app.com
+  - host: taskmanagement-app.com
     http:
       paths:
       - path: /
