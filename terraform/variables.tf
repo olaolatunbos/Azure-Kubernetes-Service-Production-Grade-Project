@@ -5,7 +5,7 @@ variable "subscription_id" {
 }
 
 variable "virtual_network_name" {
-  description = "Name of the virtual network"
+  description = "Name of the virtual network."
   type        = string
 }
 
