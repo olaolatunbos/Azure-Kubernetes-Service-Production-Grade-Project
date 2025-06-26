@@ -10,7 +10,7 @@ variable "virtual_network_name" {
 }
 
 variable "subnet_name" {
-  description = "Name of the subnet"
+  description = "Name of the subnet."
   type        = string
 }
 
@@ -20,13 +20,13 @@ variable "rg_name" {
 }
 
 variable "location" {
-  description = "Azure region location"
+  description = "Azure region location."
   type        = string
   default     = "UK South"
 }
 
 variable "environment" {
-  description = "Deployment environment (e.g. dev, prod)"
+  description = "Deployment environment (e.g. dev, prod)."
   type        = string
 }
 
