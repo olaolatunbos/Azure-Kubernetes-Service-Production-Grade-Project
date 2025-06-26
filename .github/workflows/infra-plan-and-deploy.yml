@@ -1,10 +1,5 @@
 name: Plan Azure Infrastructure Deployment
 on:
-  push:
-    branches:
-      - main
-    paths:
-      - "terraform/**"
   pull_request:
     branches:
       - main
