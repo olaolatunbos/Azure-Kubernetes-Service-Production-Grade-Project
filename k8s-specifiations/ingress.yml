@@ -3,11 +3,14 @@ kind: Ingress
 metadata:
   name: hello-world-ingress
   annotations:
-    nginx.ingress.kubernetes.io/ssl-redirect: "false"
-    nginx.ingress.kubernetes.io/use-regex: "true"
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   ingressClassName: nginx
+  tls:
+  - hosts:
+    - taskmanagement-app.com
+    secretName: example-tls
   rules:
   - host: taskmanagement-app.com
     http:
@@ -19,3 +22,4 @@ spec:
             name: app-service
             port:
               number: 80
+
