@@ -10,7 +10,7 @@ variable "virtual_network_name" {
 }
 
 variable "subnet_name" {
-  description = "Name of the subnet."
+  description = "Name of the subnet"
   type        = string
 }
 
