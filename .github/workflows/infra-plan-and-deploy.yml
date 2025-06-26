@@ -55,98 +55,28 @@ jobs:
       - name: Terraform Plan
         id: plan
         run: |
-          export exitcode=0
-          terraform plan -no-color -var-file="./environments/prod.tfvars" -out main.tfplan || export exitcode=$?
+          terraform plan -no-color -var-file="./environments/prod.tfvars" -out=plan-prod
+          terraform show -no-color plan-prod > plan-prod.txt
 
-          echo "exitcode=$exitcode" >> $GITHUB_OUTPUT
-
-          if [ $exitcode -eq 1 ]; then
-            echo "Error: Terraform plan failed"
-            exit 1
-          else
-            echo "Terraform plan was successful"
-            exit 0
-          fi
-
-      - name: Publish Terraform Plan
-        uses: actions/upload-artifact@v4
+      - name: Upload Plan
+        uses: actions/upload-artifact@v2
         with:
-          name: tfplan
-          path: ./terraform/main.tfplan
-
-      - name: Update Pull Request
-        if: github.event_name == 'pull_request'
-        uses: actions/github-script@v6
-        env:
-          PLAN: "terraform\n${{ steps.plan.outputs.stdout }}"
+          name: plan-prod
+          path: plan-prod
+      - run: |
+          echo "PLAN_PROD<<EOF" >> $GITHUB_ENV
+          cat plan-prod.txt >> $GITHUB_ENV
+          echo "EOF" >> $GITHUB_ENV
+      - name: Add Plan To PR
+        uses: thollander/actions-comment-pull-request@v1
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
-            const output = `#### Terraform Format and Style 🖌\`${{ steps.fmt.outcome }}\`
-            #### Terraform Initialization ⚙️\`${{ steps.init.outcome }}\`
-            #### Terraform Plan 📖\`${{ steps.plan.outcome }}\`
-            #### Terraform Validation 🤖\`${{ steps.validate.outcome }}\`
+          message: |
+            Terraform Prod Plan Output:
+            ```
+            ${{ env.PLAN_PROD }}
+            ```
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-            <details><summary>Show Plan</summary>
-
-            \`\`\`\n
-            ${process.env.PLAN}
-            \`\`\`
-
-            </details>
-
-            *Pushed by: @${{ github.actor }}, Action: \`${{ github.event_name }}\`*`;
-
-            github.rest.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: output
-            })
-
-      - name: Terraform Plan Status
-        if: steps.plan.outcome == 'failure'
-        run: exit 1
-
-      - name: Create String Output
-        if: github.event_name == 'pull_request'
-        id: tf-plan-string
-        run: |
-          TERRAFORM_PLAN=$(terraform show -no-color main.tfplan)
-
-          delimiter="$(openssl rand -hex 8)"
-          echo "summary<<${delimiter}" >> $GITHUB_OUTPUT
-          echo "## Terraform Plan Output" >> $GITHUB_OUTPUT
-          echo "<details><summary>Click to expand</summary>" >> $GITHUB_OUTPUT
-          echo "" >> $GITHUB_OUTPUT
-          echo '```terraform' >> $GITHUB_OUTPUT
-          echo "$TERRAFORM_PLAN" >> $GITHUB_OUTPUT
-          echo '```' >> $GITHUB_OUTPUT
-          echo "</details>" >> $GITHUB_OUTPUT
-          echo "${delimiter}" >> $GITHUB_OUTPUT
-
-      - name: Publish Terraform Plan to Task Summary
-        if: github.event_name == 'pull_request'
-        env:
-          SUMMARY: ${{ steps.tf-plan-string.outputs.summary }}
-        run: |
-          echo "$SUMMARY" >> $GITHUB_STEP_SUMMARY
-
-      - name: Push Terraform Output to PR
-        if: github.event_name == 'pull_request'
-        uses: actions/github-script@v7
-        env:
-          SUMMARY: "${{ steps.tf-plan-string.outputs.summary }}"
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
-            const body = `${process.env.SUMMARY}`;
-            github.rest.issues.createComment({
-                issue_number: context.issue.number,
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                body: body
-            })
   terraform-apply:
     name: Terraform Apply
     runs-on: ubuntu-latest
