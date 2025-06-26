@@ -1,4 +1,4 @@
-name: Plan Azure Infrastructure Deployment
+name: Terraform CI/CD
 on:
   push:
     branches:
