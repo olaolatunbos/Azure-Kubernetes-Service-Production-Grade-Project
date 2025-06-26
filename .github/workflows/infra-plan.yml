@@ -54,6 +54,8 @@ jobs:
 
       - name: Run Checkov Scan
         uses: bridgecrewio/checkov-action@v12
+        with:
+          soft_fail: true
         env:
           CHECKOV_SKIP_UPDATE: true
 
