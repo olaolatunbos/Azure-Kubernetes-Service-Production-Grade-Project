@@ -36,7 +36,7 @@ variable "acr_name" {
 }
 
 variable "aks_name" {
-  description = "Azure Kubernetes Service cluster name"
+  description = "Azure Kubernetes Service cluster name."
   type        = string
 }
 
