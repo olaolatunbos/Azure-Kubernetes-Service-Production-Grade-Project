@@ -20,7 +20,7 @@ variable "rg_name" {
 }
 
 variable "location" {
-  description = "Azure region location"
+  description = "Azure region location."
   type        = string
   default     = "UK South"
 }
