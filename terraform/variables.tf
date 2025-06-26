@@ -41,6 +41,6 @@ variable "aks_name" {
 }
 
 variable "rg_id" {
-  description = "Resource Group ID (used for scope)"
+  description = "Resource Group ID (used for scope)."
   type        = string
 }
