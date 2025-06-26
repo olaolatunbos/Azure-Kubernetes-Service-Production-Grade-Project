@@ -94,4 +94,4 @@ jobs:
           name: plan-prod
 
       - name: Terraform Apply
-        run: terraform apply -auto-approve plan-prod
+        run: terraform apply -auto-approve "plan-prod"
