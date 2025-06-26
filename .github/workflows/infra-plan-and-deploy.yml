@@ -59,7 +59,7 @@ jobs:
           terraform show -no-color plan-prod > plan-prod.txt
 
       - name: Upload Plan
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: plan-prod
           path: plan-prod
