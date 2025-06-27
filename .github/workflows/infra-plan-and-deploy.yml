@@ -56,6 +56,7 @@ jobs:
         id: plan
         run: |
           terraform plan -no-color -var-file="./environments/prod.tfvars" -out main.tfplan
+          terraform show -no-color main.tfplan > plan.txt
 
       - name: Upload Plan
         uses: actions/upload-artifact@v4
@@ -64,7 +65,7 @@ jobs:
           path: ./terraform/main.tfplan
       - run: |
           echo "PLAN_PROD<<EOF" >> $GITHUB_ENV
-          cat main.tfplan >> $GITHUB_ENV
+          cat plan.txt >> $GITHUB_ENV
           echo "EOF" >> $GITHUB_ENV
       - name: Add Plan To PR
         if: github.event_name == 'pull_request'
