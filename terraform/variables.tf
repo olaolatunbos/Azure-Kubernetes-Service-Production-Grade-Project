@@ -5,7 +5,7 @@ variable "subscription_id" {
 }
 
 variable "virtual_network_name" {
-  description = "Name of the virtual network"
+  description = "Name of the virtual network."
   type        = string
 }
 
@@ -20,13 +20,13 @@ variable "rg_name" {
 }
 
 variable "location" {
-  description = "Azure region location"
+  description = "Azure region location."
   type        = string
   default     = "UK South"
 }
 
 variable "environment" {
-  description = "Deployment environment (e.g. dev, prod)"
+  description = "Deployment environment (e.g. dev, prod)."
   type        = string
 }
 
@@ -36,7 +36,7 @@ variable "acr_name" {
 }
 
 variable "aks_name" {
-  description = "Azure Kubernetes Service cluster name"
+  description = "Azure Kubernetes Service cluster name."
   type        = string
 }
 

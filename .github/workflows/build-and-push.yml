@@ -1,4 +1,4 @@
-name: Build and Deploy Flask App
+name: Build and Push App To ACR
 
 on:
   push:
