@@ -6,6 +6,9 @@ This project focuses on deploying an **AKS (Azure Kubernetes Service)** cluster 
 
 > **Note:** This project is currently under development and subject to continuous updates.
 
+![AKSProject2 drawio-3](https://github.com/user-attachments/assets/83dd7e37-e6ae-49a5-8234-227a6e724a2e)
+
+
 ---
 
 ## Key Features
