@@ -5,6 +5,9 @@
 This project focuses on deploying an **AKS (Azure Kubernetes Service)** cluster on AWS, integrating key Kubernetes tools such as **ArgoCD**, **Helm Charts**, **Cert-Manager**, and **ExternalDNS**. The goal is to achieve an automated, and scalable infrastructure setup with GitOps workflows, secure certificate management, and automated DNS updates.
 
 > **Note:** This project is currently under development and subject to continuous updates.
+>
+
+## Architecture Diagram
 
 ![AKSProject2 drawio-3](https://github.com/user-attachments/assets/83dd7e37-e6ae-49a5-8234-227a6e724a2e)
 
