@@ -64,7 +64,7 @@ jobs:
           path: ./terraform/main.tfplan
       - run: |
           echo "PLAN_PROD<<EOF" >> $GITHUB_ENV
-          cat plan-prod.txt >> $GITHUB_ENV
+          cat main.tfplan >> $GITHUB_ENV
           echo "EOF" >> $GITHUB_ENV
       - name: Add Plan To PR
         if: github.event_name == 'pull_request'
