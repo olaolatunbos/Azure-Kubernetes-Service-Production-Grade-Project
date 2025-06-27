@@ -22,6 +22,12 @@ This project focuses on deploying an **AKS (Azure Kubernetes Service)** cluster 
 - **ExternalDNS**  
   Dynamically manages DNS records in Azure DNS based on Kubernetes resources, automating DNS record creation and updates.
 
+- \*_Prometheus_  
+  Dynamically manages DNS records in Azure DNS based on Kubernetes resources, automating DNS record creation and updates.
+
+- **Grafana**  
+  Dynamically manages DNS records in Azure DNS based on Kubernetes resources, automating DNS record creation and updates.
+
 ---
 
 ## Why This Setup Matters
