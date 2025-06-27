@@ -56,7 +56,6 @@ jobs:
         id: plan
         run: |
           terraform plan -no-color -var-file="./environments/prod.tfvars" -out main.tfplan
-          terraform show -no-color plan-prod > plan-prod.txt
 
       - name: Upload Plan
         uses: actions/upload-artifact@v4
