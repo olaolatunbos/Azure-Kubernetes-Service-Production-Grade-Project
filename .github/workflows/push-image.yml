@@ -25,18 +25,21 @@ jobs:
           username: ${{ secrets.ACR_USERNAME }}
           password: ${{ secrets.ACR_PASSWORD }}
 
-      - name: Build and tag Docker image
-        run: docker build -t ${{ secrets.ACR_LOGIN_SERVER }}/2048-game:latest -f 2048-game/Dockerfile .
+      - name: Build Docker image
+        run: docker build -t 2048game:latest ./app
 
       - name: Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@0.28.0
         with:
-          image-ref: "${{ secrets.ACR_LOGIN_SERVER }}/2048-game:latest"
+          image-ref: "2048game:latest"
           format: "table"
-          exit-code: "0"
+          exit-code: "0" # Set to "1" to fail on findings
           ignore-unfixed: true
           vuln-type: "os,library"
           severity: "CRITICAL,HIGH"
 
+      - name: Tag image for ACR
+        run: docker tag 2048game:latest ${{ secrets.ACR_LOGIN_SERVER }}/2048game:latest
+
       - name: Push Docker image to ACR
-        run: docker push ${{ secrets.ACR_LOGIN_SERVER }}/2048-game:latest
+        run: docker push ${{ secrets.ACR_LOGIN_SERVER }}/2048game:latest
