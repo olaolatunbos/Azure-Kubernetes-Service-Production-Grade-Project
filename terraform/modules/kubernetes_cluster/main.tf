@@ -21,9 +21,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
     identity_ids = [azurerm_user_assigned_identity.aks_managed_identity.id]
   }
 
-  tags = {
-    environment = var.deployment_environment
-  }
+  tags = var.tags
 }
 
 resource "azurerm_user_assigned_identity" "aks_managed_identity" {

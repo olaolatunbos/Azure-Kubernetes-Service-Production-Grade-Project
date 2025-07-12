@@ -4,9 +4,7 @@ resource "azurerm_virtual_network" "main" {
   location            = var.resource_location
   resource_group_name = var.resource_group_name
 
-  tags = {
-    environment = var.deployment_environment
-  }
+  tags = var.tags
 }
 
 resource "azurerm_subnet" "main" {

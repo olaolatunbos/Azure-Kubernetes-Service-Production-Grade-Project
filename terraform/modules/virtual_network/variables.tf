@@ -35,3 +35,9 @@ variable "deployment_environment" {
   description = "Deployment environment (e.g., dev, test, prod)"
   type        = string
 }
+
+variable "tags" {
+  description = "A map of tags to assign to the resource"
+  type        = map(string)
+  default     = {}
+}
