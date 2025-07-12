@@ -24,3 +24,9 @@ variable "admin_enabled" {
   default     = true
   description = "Whether admin access is enabled"
 }
+
+variable "tags" {
+  description = "A map of tags to assign to the resource"
+  type        = map(string)
+  default     = {}
+}
